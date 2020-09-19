@@ -6,19 +6,10 @@ using System.Threading.Tasks;
 
 namespace SafeStak.Deltas.WebApi.Exceptions
 {
+    public record ErrorDetail(string Code, string Message);
+
     public class GlobalExceptionHandlerMiddleware
     {
-        public struct ErrorDetail
-        {
-            public ErrorDetail(string errorCode, string errorMessage)
-            {
-                Code = errorCode;
-                Message = errorMessage;
-            }
-            public string Code { get; }
-            public string Message { get; }
-        }
-
         private const int DefaultEventId = 0;
 
         private readonly RequestDelegate _next;
@@ -52,17 +43,24 @@ namespace SafeStak.Deltas.WebApi.Exceptions
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)error.HttpStatusCode;
 
-
             await context.Response.WriteAsync(responseBody);
         }
 
         private static void LogException(Exception ex, ILogger logger)
         {
-            var loggableException = ex as ILoggableException;
-            var eventId = loggableException?.EventId ?? DefaultEventId;
-            //var customProperties = loggableException?.CustomProperties;
+            var eventId = ex switch
+            {
+                ILoggableException loggable => loggable.EventId,
+                _ => DefaultEventId
+            };
 
             logger.LogError(eventId, ex, ex.Message);
         }
     }
+}
+
+// Workaround for https://stackoverflow.com/a/62656145
+namespace System.Runtime.CompilerServices
+{
+    public class IsExternalInit { }
 }

@@ -19,11 +19,11 @@ namespace SafeStak.Deltas.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var poolApiSettings = _configuration.GetSection("PoolApiSettings").Get<PoolApiSettings>();
+
             services.AddControllers();
 
             services.AddHealthChecks();
-
-            var poolApiSettings = _configuration.GetSection("PoolApiSettings").Get<PoolApiSettings>();
 
             services.AddSingleton(poolApiSettings);
 

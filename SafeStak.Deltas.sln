@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeStak.Deltas.CardanoNode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeStak.Deltas.WebApi", "Src\WebApi\SafeStak.Deltas.WebApi.csproj", "{F3AF28AC-45BB-4F6A-82EB-B0B4E93B63F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{18C36711-860C-4990-8911-AF21958FCB9B}"
+	ProjectSection(SolutionItems) = preProject
+		Deploy\README.md = Deploy\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{1C1296C1-8E5A-408D-AB8B-7E0A897A5701}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

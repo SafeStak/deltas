@@ -10,8 +10,11 @@ namespace SafeStak.Deltas.WebApi.Exceptions
 
     public class ErrorResponseMapper : IErrorResponseMapper
     {
+        public const string UnknownError = "An unknown error has occured.";
+        public const string PoolApiException = "Unsuccessful response from the Pool API";
+
         private static ErrorResponse DefaultErrorDetail => new ErrorResponse(
-            HttpStatusCode.InternalServerError, ErrorCode.UnknownError, ErrorMessages.UnknownError);
+            HttpStatusCode.InternalServerError, ErrorCode.UnknownError, UnknownError);
 
         public ErrorResponse MapFromException(Exception ex)
         {
@@ -20,7 +23,7 @@ namespace SafeStak.Deltas.WebApi.Exceptions
                 PoolApiResponseException _ => new ErrorResponse(
                     HttpStatusCode.InternalServerError,
                     ErrorCode.PoolApiResponseException,
-                    ErrorMessages.PoolApiException),
+                    PoolApiException),
                 _ => DefaultErrorDetail
             };
         }

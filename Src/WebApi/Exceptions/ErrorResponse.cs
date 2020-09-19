@@ -2,14 +2,19 @@
 
 namespace SafeStak.Deltas.WebApi.Exceptions
 {
-    public static class ErrorMessages
+    public enum ErrorCode
     {
-        public const string UnknownError = "An unknown error has occured.";
-        public const string PoolApiException = "Unsuccessful response from the Pool API";
+        UnknownError,
+        InvalidRequest,
+        PoolApiResponseException
     }
 
     public class ErrorResponse
     {
+        public HttpStatusCode HttpStatusCode { get; set; }
+        public string ErrorCode { get; set; }
+        public string ErrorMessage { get; set; }
+
         public ErrorResponse(HttpStatusCode httpStatusCode, ErrorCode errorCode, string errorMessage)
         {
             HttpStatusCode = httpStatusCode;
@@ -23,9 +28,5 @@ namespace SafeStak.Deltas.WebApi.Exceptions
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;
         }
-
-        public string ErrorMessage { get; set; }
-        public HttpStatusCode HttpStatusCode { get; set; }
-        public string ErrorCode { get; set; }
     }
 }
