@@ -21,7 +21,7 @@ namespace SafeStak.Deltas.WebApi
             sb.AppendLine($"safestats_pool_blocks_epoch_estimate {stats.BlocksEpochEstimate}");
             sb.AppendLine($"safestats_pool_lifetime {stats.BlocksLifetime}");
             sb.AppendLine($"safestats_pool_delegator_count {stats.DelegatorCount}");
-            sb.AppendLine($"safestats_pool_saturated_percentage {stats.SaturatedPercentage}");
+            sb.AppendLine($"safestats_pool_saturated {stats.SaturatedPercentage}");
 
             return sb.ToString();
         }
