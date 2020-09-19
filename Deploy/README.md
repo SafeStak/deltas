@@ -1,5 +1,6 @@
+# Current Steps to Setup API Server 
 
-# Current Steps to Setup API Server
+* Until CICD is sorted
 
 Install core dependencies
 ```
