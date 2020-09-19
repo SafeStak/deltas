@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace SafeStak.Deltas.WebApi
 {
@@ -14,6 +16,12 @@ namespace SafeStak.Deltas.WebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration((hostContext, configurationBuilder) =>
+                    {
+                        configurationBuilder
+                            .SetBasePath(Directory.GetCurrentDirectory())
+                            .AddEnvironmentVariables();
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }
