@@ -1,0 +1,14 @@
+[Unit]
+Description=api-poolfolio
+After=multi-user.target
+
+[Service]
+User=ss
+ExecStart=/usr/bin/dotnet /var/www/api-poolfolio/SafeStak.Deltas.WebApi.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=api-poolfolio-log
+
+[Install]
+WantedBy=multi-user.target
