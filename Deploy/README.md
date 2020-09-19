@@ -19,8 +19,8 @@ sudo apt-get install -y apt-transport-https net-tools prometheus-node-exporter &
 
 Set up nginx
 ```
-sudo chown -R ss /etc/nginx/sites-available
-code /etc/nginx/sites-available/default
+sudo chown -R YOURUSERNAME /etc/nginx/sites-available
+nano /etc/nginx/sites-available/default
 ```
 
 Edit default file with
@@ -38,10 +38,15 @@ server {
 }
 ```
 
+Restart nginx
+```
+sudo nginx -s reload
+```
+
 Build and publish API
 ```
 sudo mkdir /var/www/api-poolfolio
-sudo chown -R ss /var/www/api-poolfolio
+sudo chown -R YOURUSERNAME /var/www/api-poolfolio
 
 git clone https://github.com/SafeStak/deltas
 cd deltas/Src/WebApi
@@ -53,7 +58,7 @@ Create service
 ```
 sudo nano /etc/systemd/system/api-poolfolio.service
 ```
-After running that command, the nano simple text editor will be open immediately just copy the following configuration and past it into the nano text editor.
+After running that command, the nano simple text editor will be open immediately just copy the following configuration and paste it into the nano text editor.
 ```
 [Unit]
 Description=api-poolfolio
@@ -76,5 +81,5 @@ WantedBy=multi-user.target
 
 Enable service on boot
 ```
-sudo systemctl enable appserviceunitefile.service
+sudo systemctl enable api-poolfolio.service
 ```

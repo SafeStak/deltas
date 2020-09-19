@@ -21,7 +21,7 @@ namespace SafeStak.Deltas.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("v1/poolstats/{poolId:required}")]
+        [Route("safestats/v1/pool/{poolId:required}")]
         public async Task<string> Get(string poolId, CancellationToken ct)
         {
             var stats = await _retriever.RetrievePoolStatsAsync(poolId, ct);
