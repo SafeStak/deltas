@@ -6,7 +6,7 @@ namespace SafeStak.Deltas.WebApi
     {
         public string PoolId { get; set; }
         public string Ticker { get; set; }
-        public int CurrentEpoch{ get; set; }
+        public int RewardsEpoch { get; set; }
         public DateTimeOffset StatTimestamp { get; set; }
         public long LiveStakeLovelaces { get; set; }
         public long ActiveStakeLovelaces { get; set; }

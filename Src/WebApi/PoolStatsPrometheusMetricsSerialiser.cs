@@ -13,8 +13,7 @@ namespace SafeStak.Deltas.WebApi
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine($"safestats_currentepoch {stats.CurrentEpoch}");
-            sb.AppendLine($"safestats_timestamp_updated {stats.StatTimestamp}");
+            sb.AppendLine($"safestats_timestamp_updated {stats.StatTimestamp.Ticks}");
             sb.AppendLine($"safestats_pool_id {stats.PoolId}");
             sb.AppendLine($"safestats_pool_ticker {stats.Ticker}");
             sb.AppendLine($"safestats_pool_active_stake {stats.ActiveStakeLovelaces}");

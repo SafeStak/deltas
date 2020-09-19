@@ -21,7 +21,7 @@ namespace SafeStak.Deltas.WebApi.AdaPools
             {
                 PoolId = summary.Data.Id,
                 Ticker = summary.Data.Db_ticker,
-                CurrentEpoch = int.Parse(summary.Data.Rewards_epoch),
+                RewardsEpoch = int.Parse(summary.Data.Rewards_epoch),
                 ActiveStakeLovelaces = long.Parse(summary.Data.Active_stake),
                 LiveStakeLovelaces = long.Parse(summary.Data.Total_stake),
                 PledgedLovelaces = long.Parse(summary.Data.Pledge),
