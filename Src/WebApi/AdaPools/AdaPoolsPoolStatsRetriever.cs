@@ -13,11 +13,11 @@ namespace SafeStak.Deltas.WebApi.AdaPools
             _adaPoolsClient = adaPoolsClient;
         }
 
-        public async Task<PoolStatsResponse> RetrievePoolStatsAsync(string poolId, CancellationToken ct = default)
+        public async Task<PoolStats> RetrievePoolStatsAsync(string poolId, CancellationToken ct = default)
         {
             var summary = await _adaPoolsClient.GetPoolSummaryAsync(poolId, ct).ConfigureAwait(false);
             
-            return new PoolStatsResponse
+            return new PoolStats
             {
                 PoolId = summary.Data.Id,
                 Ticker = summary.Data.Db_ticker,
@@ -30,7 +30,7 @@ namespace SafeStak.Deltas.WebApi.AdaPools
                 BlocksEpochEstimate = summary.Data.Blocks_estimated,
                 BlocksLifetime = int.Parse(summary.Data.Blocks_lifetime),
                 DelegatorCount = int.Parse(summary.Data.Delegators),
-                SaturatedPercentage = summary.Data.Saturated,
+                Saturated = summary.Data.Saturated,
                 StatTimestamp = DateTimeOffset.Now
             };
         }

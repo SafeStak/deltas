@@ -2,7 +2,7 @@
 
 namespace SafeStak.Deltas.WebApi
 {
-    public class PoolStatsResponse
+    public class PoolStats
     {
         public DateTimeOffset StatTimestamp { get; set; }
         public long ActiveStakeLovelaces { get; set; }
@@ -13,7 +13,7 @@ namespace SafeStak.Deltas.WebApi
         public long ActualPledgedLovelaces { get; set; }
         public int BlocksLifetime { get; set; }
         public int DelegatorCount { get; set; }
-        public double SaturatedPercentage { get; set; }
+        public double Saturated { get; set; }
         public string PoolId { get; set; }
         public string Ticker { get; set; }
         public int RewardsEpoch { get; set; }

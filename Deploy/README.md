@@ -1,7 +1,8 @@
 # Current Steps to Setup API Server 
 
-* Until CICD is sorted
+Please use this guide until CICD flows are sorted
 
+## Steps 
 Install core dependencies
 ```
 sudo unattended-upgrade

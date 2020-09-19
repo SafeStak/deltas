@@ -4,12 +4,12 @@ namespace SafeStak.Deltas.WebApi
 {
     public interface IPoolStatsSerialiser
     {
-        string Serialise(PoolStatsResponse stats);
+        string Serialise(PoolStats stats);
     }
 
     public class PoolStatsPrometheusMetricsSerialiser : IPoolStatsSerialiser
     {
-        public string Serialise(PoolStatsResponse stats)
+        public string Serialise(PoolStats stats)
         {
             var sb = new StringBuilder();
 
@@ -20,7 +20,7 @@ namespace SafeStak.Deltas.WebApi
             sb.AppendLine($"safestats_pool_blocks_epoch {stats.BlocksEpoch}");
             sb.AppendLine($"safestats_pool_blocks_epoch_estimate {stats.BlocksEpochEstimate}");
             sb.AppendLine($"safestats_pool_delegator_count {stats.DelegatorCount}");
-            sb.AppendLine($"safestats_pool_saturated {stats.SaturatedPercentage}");
+            sb.AppendLine($"safestats_pool_saturated {stats.Saturated}");
             sb.AppendLine($"safestats_pool_pledge {stats.PledgedLovelaces}");
             sb.AppendLine($"safestats_pool_actual_pledge {stats.ActualPledgedLovelaces}");
 

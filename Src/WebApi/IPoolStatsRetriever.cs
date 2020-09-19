@@ -5,6 +5,6 @@ namespace SafeStak.Deltas.WebApi
 {
     public interface IPoolStatsRetriever
     {
-        Task<PoolStatsResponse> RetrievePoolStatsAsync(string poolId, CancellationToken ct = default);
+        Task<PoolStats> RetrievePoolStatsAsync(string poolId, CancellationToken ct = default);
     }
 }
