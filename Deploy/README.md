@@ -1,6 +1,6 @@
 # Current Steps to Setup API Server 
 
-Please use this guide until CICD flows are sorted
+Please use this guide until CI/CD flows are sorted
 
 ## Steps 
 Install core dependencies
@@ -17,6 +17,27 @@ sudo dpkg -i packages-microsoft-prod.deb
 
 sudo apt-get install -y apt-transport-https net-tools prometheus-node-exporter && \
   sudo apt-get update -y && sudo apt-get install -y dotnet-sdk-3.1
+```
+
+Build and publish API
+```
+sudo mkdir /var/www/api-poolfolio
+sudo chown -R YOURUSERNAME /var/www/api-poolfolio
+
+git clone https://github.com/SafeStak/deltas
+cd deltas/Src/WebApi
+dotnet publish -c release -o /var/www/api-poolfolio
+```
+
+Update [service manifest file](./api-poolfolio.service) and replace YOURUSERNAME with appropriate service account and run 
+```
+sudo cp api-poolfolio.service /etc/systemd/system/api-poolfolio.service
+sudo chmod 644 /etc/systemd/system/api-poolfolio.service
+```
+
+Enable service on boot
+```
+sudo systemctl enable api-poolfolio.service
 ```
 
 Set up nginx
@@ -45,43 +66,7 @@ Restart nginx
 sudo nginx -s reload
 ```
 
-Build and publish API
+Test the API
 ```
-sudo mkdir /var/www/api-poolfolio
-sudo chown -R YOURUSERNAME /var/www/api-poolfolio
-
-git clone https://github.com/SafeStak/deltas
-cd deltas/Src/WebApi
-dotnet publish -c release -o /var/www/api-poolfolio
-```
-
-Create service
-
-```
-sudo nano /etc/systemd/system/api-poolfolio.service
-```
-After running that command, the nano simple text editor will be open immediately just copy the following configuration and paste it into the nano text editor.
-```
-[Unit]
-Description=api-poolfolio
-
-[Service]
-WorkingDirectory=/var/www/api-poolfolio
-ExecStart=/usr/bin/dotnet /var/www/api-poolfolio/SafeStak.Deltas.WebApi.dll
-Restart=always
-# Restart service after 10 seconds if the dotnet service crashes:
-RestartSec=10
-KillSignal=SIGINT
-SyslogIdentifier=api-poolfolio-log
-User=rebin
-Environment=ASPNETCORE_ENVIRONMENT=Production
-Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable service on boot
-```
-sudo systemctl enable api-poolfolio.service
+curl localhost/safestats/v1/pools/74a10b8241fc67a17e189a58421506b7edd629ac490234933afbed97/metrics
 ```

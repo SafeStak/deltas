@@ -3,7 +3,8 @@ Description=api-poolfolio
 After=multi-user.target
 
 [Service]
-User=ss
+User=YOURUSERNAME
+WorkingDirectory=/var/www/api-poolfolio/
 ExecStart=/usr/bin/dotnet /var/www/api-poolfolio/SafeStak.Deltas.WebApi.dll
 Restart=always
 RestartSec=10

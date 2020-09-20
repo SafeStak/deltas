@@ -14,8 +14,8 @@ namespace SafeStak.Deltas.WebApi
         public int BlocksLifetime { get; set; }
         public int DelegatorCount { get; set; }
         public double Saturated { get; set; }
+        public int RewardsEpoch { get; set; }
         public string PoolId { get; set; }
         public string Ticker { get; set; }
-        public int RewardsEpoch { get; set; }
     }
 }
