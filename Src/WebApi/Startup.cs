@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SafeStak.Deltas.WebApi.AdaPools;
 using System;
+using Microsoft.AspNetCore.HttpOverrides;
 using SafeStak.Deltas.WebApi.Middleware;
 
 namespace SafeStak.Deltas.WebApi
@@ -39,6 +40,12 @@ namespace SafeStak.Deltas.WebApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // To accommodate nginx proxy header forwarding 
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             //app.UseHttpsRedirection();
@@ -46,7 +53,7 @@ namespace SafeStak.Deltas.WebApi
             app.UseRouting();
 
             //app.UseAuthorization();
-
+            
             app.UseMiddleware<EnrichResponseHeadersMiddleware>();
 
             app.UseEndpoints(endpoints =>

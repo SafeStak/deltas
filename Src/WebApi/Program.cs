@@ -16,13 +16,26 @@ namespace SafeStak.Deltas.WebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureAppConfiguration((hostContext, configurationBuilder) =>
-                    {
-                        configurationBuilder
-                            .SetBasePath(Directory.GetCurrentDirectory())
-                            .AddEnvironmentVariables();
-                    });
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .ConfigureAppConfiguration((hostContext, configurationBuilder) =>
+                        {
+                            configurationBuilder
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddEnvironmentVariables();
+                        })
+                        .ConfigureKestrel(serverOptions =>
+                        {
+                            serverOptions.ListenUnixSocket("/tmp/kestrel.sock");
+                            //serverOptions.ListenUnixSocket("/tmp/kestrel-test.sock",
+                            //    listenOptions =>
+                            //    {
+                            //        listenOptions.UseHttps("testCert.pfx",
+                            //            "testpassword");
+                            //    });
+                            //In the Nginx configuration file, set the server > location > proxy_pass entry to http://unix:/tmp/kestrel.sock:/;  
+                            //Ensure that the socket is writeable by Nginx(for example, chmod go+w /tmp/kestrel.sock)).
+                        })
+                        .UseStartup<Startup>();
                 });
     }
 }
