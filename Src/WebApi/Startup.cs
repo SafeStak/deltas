@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SafeStak.Deltas.WebApi.AdaPools;
 using System;
+using SafeStak.Deltas.WebApi.Middleware;
 
 namespace SafeStak.Deltas.WebApi
 {
@@ -38,16 +39,15 @@ namespace SafeStak.Deltas.WebApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             //app.UseHttpsRedirection();
 
             app.UseRouting();
 
             //app.UseAuthorization();
+
+            app.UseMiddleware<EnrichResponseHeadersMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

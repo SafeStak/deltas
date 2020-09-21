@@ -41,24 +41,24 @@ namespace SafeStak.Deltas.WebApi.AdaPools
                 var response = await _httpClient.SendAsync(request, ct).ConfigureAwait(false);
                 if (response == null || !response.IsSuccessStatusCode)
                 {
-                    throw new PoolApiResponseException($"Unsuccessful response from {request.RequestUri}", response);
+                    throw new PoolApiResponseException($"Unsuccessful response from {request.RequestUri}", request, response);
                 }
 
                 var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
                 if (responseStream == null || responseStream.Length == 0)
                 {
-                    throw new PoolApiResponseException($"Null or empty response from {request.RequestUri}");
+                    throw new PoolApiResponseException($"Null or empty response from {request.RequestUri}", request);
                 }
 
                 return await JsonSerializer.DeserializeAsync<PoolSummary>(responseStream, JsonSerializerOptions).ConfigureAwait(false);
             }
             catch (HttpRequestException e)
             {
-                throw new PoolApiResponseException($"Failed to send request to {request.RequestUri}", e);
+                throw new PoolApiResponseException($"Failed to send request to {request.RequestUri}", request, e);
             }
             catch (JsonException e)
             {
-                throw new PoolApiResponseException($"Failed to deserialize response from {request.RequestUri}", e);
+                throw new PoolApiResponseException($"Failed to deserialize response from {request.RequestUri}", request, e);
             }
         }
     }
