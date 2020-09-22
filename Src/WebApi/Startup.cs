@@ -54,7 +54,7 @@ namespace SafeStak.Deltas.WebApi
 
             //app.UseAuthorization();
             
-            app.UseMiddleware<EnrichResponseHeadersMiddleware>();
+            app.UseMiddleware<ResponseHeadersMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

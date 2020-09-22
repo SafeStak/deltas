@@ -1,4 +1,4 @@
-﻿namespace SafeStak.Deltas.WebApi
+﻿namespace SafeStak.Deltas.WebApi.Settings
 {
     public class PoolApiSettings
     {

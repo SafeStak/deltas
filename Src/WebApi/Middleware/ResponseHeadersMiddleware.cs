@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace SafeStak.Deltas.WebApi.Middleware
 {
-    public class EnrichResponseHeadersMiddleware
+    public class ResponseHeadersMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public EnrichResponseHeadersMiddleware(RequestDelegate next)
+        public ResponseHeadersMiddleware(RequestDelegate next)
         {
             _next = next;
         }
