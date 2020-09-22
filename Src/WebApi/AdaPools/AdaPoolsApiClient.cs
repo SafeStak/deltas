@@ -1,4 +1,5 @@
 ﻿using SafeStak.Deltas.WebApi.Exceptions;
+using SafeStak.Deltas.WebApi.Settings;
 using System;
 using System.Net.Http;
 using System.Text.Json;

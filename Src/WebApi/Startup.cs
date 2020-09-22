@@ -7,6 +7,7 @@ using SafeStak.Deltas.WebApi.AdaPools;
 using System;
 using Microsoft.AspNetCore.HttpOverrides;
 using SafeStak.Deltas.WebApi.Middleware;
+using SafeStak.Deltas.WebApi.Settings;
 
 namespace SafeStak.Deltas.WebApi
 {
