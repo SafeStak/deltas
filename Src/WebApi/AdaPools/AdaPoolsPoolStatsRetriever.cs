@@ -28,7 +28,7 @@ namespace SafeStak.Deltas.WebApi.AdaPools
                 ActualPledgedLovelaces = long.Parse(summary.Data.Pledged),
                 BlocksEpoch = int.Parse(summary.Data.Blocks_epoch),
                 BlocksEpochEstimate = summary.Data.Blocks_estimated,
-                BlocksLifetime = int.Parse(summary.Data.Blocks_lifetime),
+                BlocksLifetime = int.Parse(summary.Data.Blocks_lifetime) + int.Parse(summary.Data.Blocks_epoch),
                 DelegatorCount = int.Parse(summary.Data.Delegators),
                 Saturated = summary.Data.Saturated,
                 StatTimestamp = DateTimeOffset.Now

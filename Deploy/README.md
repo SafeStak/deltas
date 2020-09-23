@@ -51,7 +51,7 @@ Edit default file with
 server {
     listen 80;
     location / {
-		proxy_pass http://localhost:5000;
+		proxy_pass http://unix:/tmp/kestrel.sock:/;
 		proxy_http_version 1.1;
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection keep-alive;
@@ -61,9 +61,10 @@ server {
 }
 ```
 
-Restart nginx
+Restart nginx and ensure socket is writable 
 ```
 sudo nginx -s reload
+chmod go+w /tmp/kestrel.sock
 ```
 
 Test the API
