@@ -19,7 +19,7 @@ namespace SafeStak.Deltas.WebApi.AdaPools
             
             return new PoolStats
             {
-                PoolId = summary.Data.Id,
+                PoolId = summary.Data.Pool_id,
                 Ticker = summary.Data.Db_ticker,
                 RewardsEpoch = int.Parse(summary.Data.Rewards_epoch),
                 ActiveStakeLovelaces = long.Parse(summary.Data.Active_stake),
