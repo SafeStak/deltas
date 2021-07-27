@@ -25,7 +25,7 @@ namespace SafeStak.Deltas.WebApi
                         })
                         .ConfigureKestrel(serverOptions =>
                         {
-                            serverOptions.ListenUnixSocket("/tmp/kestrel.sock");
+                            //serverOptions.ListenUnixSocket("/tmp/kestrel.sock");
                             //serverOptions.ListenUnixSocket("/tmp/kestrel-test.sock",
                             //    listenOptions =>
                             //    {
