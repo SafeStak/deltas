@@ -25,12 +25,12 @@ namespace SafeStaj.Deltas.WebApi.UnitTests.AdaPools
         }
 
         [Theory]
-        [InlineData("00000000000000000000000000000000000000000000000000000000", "0", "0", "0", 0, "0", "Description", "Name", "Ticker", "https://www.pool.com", "0", "0", "0", "0", "0", "0", 0)]
-        [InlineData("74a10b8241fc67a17e189a58421506b7edd629ac490234933afbed97", "11", "2200001", "2", 1.1, "10", "Description", "{SAFE}STAK", "SAFE", "https://www.safestak.com", "20", "550000000000", "555000000000", "5.5", "5500000000000", "200", 0.5)]
+        [InlineData("00000000000000000000000000000000000000000000000000000000", 0, 0, "0", 0, "0", "Description", "Name", "Ticker", "https://www.pool.com", "0", "0", "0", "0", "0", "0", 0)]
+        [InlineData("74a10b8241fc67a17e189a58421506b7edd629ac490234933afbed97", 2, 3109912824810, "2", 1.1, "10", "Description", "{SAFE}STAK", "SAFE", "https://www.safestak.com", "20", "550000000000", "555000000000", "5.5", "5500000000000", "200", 0.5)]
         public async Task Map_Fields_From_Ada_Pools_Summary_Correctly(
             string id,
-            string activeBlocks,
-            string activeStake,
+            int activeBlocks,
+            long activeStake,
             string blocksEpoch,
             double blocksEstimated,
             string blocksLifetime,
@@ -80,7 +80,7 @@ namespace SafeStaj.Deltas.WebApi.UnitTests.AdaPools
             poolStats.PoolId.Should().Be(id);
             poolStats.Ticker.Should().Be(ticker);
             poolStats.RewardsEpoch.Should().Be(int.Parse(rewardsEpoch));
-            poolStats.ActiveStakeLovelaces.Should().Be(long.Parse(activeStake));
+            poolStats.ActiveStakeLovelaces.Should().Be(activeStake);
             poolStats.BlocksLifetime.Should().Be(int.Parse(blocksLifetime) + int.Parse(blocksEpoch));
             poolStats.BlocksEpoch.Should().Be(int.Parse(blocksEpoch));
             poolStats.ActualPledgedLovelaces.Should().Be(long.Parse(pledged));
@@ -88,7 +88,6 @@ namespace SafeStaj.Deltas.WebApi.UnitTests.AdaPools
             poolStats.DelegatorCount.Should().Be(int.Parse(delegators));
             poolStats.Saturated.Should().Be(saturated);
             poolStats.PledgedLovelaces.Should().Be(long.Parse(pledge));
-            poolStats.ActiveStakeLovelaces.Should().Be(long.Parse(activeStake));
             poolStats.LiveStakeLovelaces.Should().Be(long.Parse(totalStake));
         }
     }

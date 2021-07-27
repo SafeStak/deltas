@@ -19,8 +19,8 @@
         public string Delegators { get; set; }
         public string Pledged { get; set; }
         public double Tax_real { get; set; }
-        public string Active_stake { get; set; }
-        public string Active_blocks { get; set; }
+        public long Active_stake { get; set; }
+        public int Active_blocks { get; set; }
         public double Saturated { get; set; }
         public int Rank { get; set; }
         public double Blocks_estimated { get; set; }
